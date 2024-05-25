@@ -1,0 +1,22 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:linux-arm-2.20.2-alpine
+    container_name: portainer
+    restart: always
+    ports:
+      - 8000:8000
+      - 9443:9443
+      - 9000:9000
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - dagobah_proxy
+
+volumes:
+  portainer_data:
+  
+networks:
+  dagobah_proxy:
+    name: dagobah_proxy
+    external: true
