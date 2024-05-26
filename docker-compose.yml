@@ -12,6 +12,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - dagobah_proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.local.fiftyfifty90.com`)"
+      - "traefik.http.routers.portainer.entrypoints=https"
+      - "traefik.http.routers.portainer.tls=true"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
 
 volumes:
   portainer_data:
